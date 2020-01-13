@@ -31,7 +31,7 @@ public:
          *
          * @return vehicle_type of the vehicle (represented by enum vehicleType)
          */
-        const VehicleType getVehicleType() const;
+        VehicleType getVehicleType() const;
         /**
          * @brief Get the parking spot of this ParkingSpot
          *
@@ -44,14 +44,14 @@ public:
          *
          * @return entrance_time of the vehicle (represented by Time class)
          */
-        const Time getEntranceTime() const;
+        Time getEntranceTime() const;
 
         /**
          * @brief Get the license plate of this vehicle
          *
          * @return license_plate of the vehicle (represented by typedef LicenseString)
          */
-        const LicensePlate  getLicensePlate() const;
+        LicensePlate getLicensePlate() const;
 
         /**
          * @brief Update parking spot of existing vehicle
@@ -63,20 +63,29 @@ public:
 
 };
 
+
+class VehicleCompare{
+public:
+    VehicleCompare() = default;
+    bool operator()(const Vehicle& vehicle1, const Vehicle& vehicle2) const{
+        return vehicle1.getLicensePlate() == vehicle2.getLicensePlate();
+    };
+};
+
 Vehicle::Vehicle(VehicleType vehicle_type, LicensePlate license_plate,
                  Time entrance_time):
                  vehicle_type(vehicle_type),
                  license_plate(license_plate),
                  entrance_time(entrance_time) {
 }
-const VehicleType Vehicle::getVehicleType() const {
+VehicleType Vehicle::getVehicleType() const {
     return vehicle_type;
 }
 
-const Time Vehicle::getEntranceTime() const {
+Time Vehicle::getEntranceTime() const {
     return entrance_time;
 }
-const LicensePlate Vehicle::getLicensePlate() const {
+LicensePlate Vehicle::getLicensePlate() const {
     return license_plate;
 }
 ParkingSpot Vehicle::getParkingSpot() const {
